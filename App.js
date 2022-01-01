@@ -1,17 +1,17 @@
+import 'react-native-gesture-handler';
 import * as React from 'react';
-import { Button, Text, View, StyleSheet } from 'react-native';
+import { Button, Text, View, Picker, StyleSheet } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
-
-
+import ScrollPicker from 'react-native-wheel-scrollview-picker';
 
 const Tab = createBottomTabNavigator();
 
 function Home() {
   return(
     <View>
-      <Text>Home Screen</Text>
+      <Text>Home Page</Text>
     </View>
   );
 
@@ -20,7 +20,8 @@ function Home() {
 function Events() {
   return(
     <View>
-      <Text>Events Screen</Text>
+     <Text>Local Events</Text>
+      
     </View>
   );
   
@@ -70,7 +71,7 @@ function MyTabs() {
         options = {{
           tabBarLabel: 'Events',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name = "home" color={color} size={size} />
+            <MaterialCommunityIcons name = "car" color={color} size={size} />
           ),
         }}
         />
@@ -80,7 +81,7 @@ function MyTabs() {
         options = {{
           tabBarLabel: 'Services',
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name = "account" color={color} size={size} />
+            <MaterialCommunityIcons name = "hammer-wrench" color={color} size={size} />
           ),
         }}
         />
