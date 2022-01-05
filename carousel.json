@@ -1,0 +1,18 @@
+[
+    {
+        "brand": "Chevy",
+        "model": "Camero",
+        "uri": "./assets/Cars/chevyCamero.jpg"
+    },
+    {
+        "brand": "Ford",
+        "model": "Mustang",
+        "uri": "./assets/Cars/FordMustang.jpg"
+
+    },
+    {
+        "brand": "Dodge",
+        "model": "Challenger",
+        "uri": "./assets/Cars/DodgeChallenger.jpg"
+    }
+]
