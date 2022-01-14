@@ -1,6 +1,6 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
-import { Button, Text, View, Picker, StyleSheet, ScrollView, FlatList, Image } from 'react-native';
+import { Button, Text, View, Picker, StyleSheet, ScrollView, FlatList, Image, Alert, ActivityIndicator } from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
@@ -26,10 +26,8 @@ const Home = () => {
          </View>
      
 
-      <View style = {styles.picContent}>
-        <Text>Side scrolling feature to show pictures</Text>
-        <Text>Featured Events</Text>
-
+      <View style = {styles.picContentView}>
+      <Image style = {styles.carPics} source = {require('./assets/Cars/FordMustang.jpg')}/>
       </View>
 
       <View style = {styles.signUpLogin}>
@@ -47,16 +45,22 @@ const Home = () => {
 
       <View style = {styles.loginButton}>
 
-      <Button  style = {styles.loginButtonSpace}
-        title="Sign Up!"
-        color='#D8232F'
-        onPress={() => Alert.alert('Simple Button pressed')}
-      />
-      <Button  style = {styles.loginButtonSpace}
-        title="Login"
-        color='#D8232F'
-        onPress={() => Alert.alert('Simple Button pressed')}
-      />
+        <View style = {styles.signUpButtonView}>
+        <Button
+          title="Sign Up!"
+          color='#D8232F'
+          onPress={() => Alert.alert('Signed Up!')}
+        />
+        </View>
+        
+        <View>
+        <Button
+          title="Login"
+          color='#D8232F'
+          onPress={() => Alert.alert('Logged In!')}
+        />
+        </View>
+      
       </View>
 
       <View style = {styles.footerContent}>
@@ -77,6 +81,7 @@ const Events = () => {
   const [city, setCity] = useState([
     
   ])
+  
   return(
     <View  style = {styles.container}  >
      <View style = {styles.headBanner}>
@@ -88,25 +93,123 @@ const Events = () => {
     <View style = {styles.eventBanner}>
       <Text style = {styles.eventName}>Local Events</Text>
          
-         <View style = {styles.localEventsViewLeft}> 
+         <View style = {styles.cityView}> 
          <TextInput style = {styles.localEventsInput}
         placeholder='name@example.com'>
           City</TextInput>
-         </View>
-
-        <View style = {styles.localEventsViewRight}>
-        <TextInput style = {styles.localEventsInput}
+          <TextInput style = {styles.localEventsInput}
         placeholder='name@example.com'>
           State</TextInput>
         </View>
-          
     </View>
 
 
 
-    <View style = {styles.picContent}>
-        <Text>Side scrolling feature to show pictures</Text>
-        <Text>Featured Events</Text>
+    <View style = {styles.picContentView}>
+
+    
+
+        <ScrollView>
+          <View>
+            <Image style = {styles.carPics} source = {require('./assets/Cars/FordMustang.jpg')}/>
+            <ActivityIndicator style = {styles.carLoad}
+              size="large" color="#0000ff">
+            </ActivityIndicator>
+            <Button style = {styles.reportButton}
+                  title="Report"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Report!')}
+                />
+            <View style = {styles.eventInfo}>
+              <Text style = {styles.eventText}>Cars and Coffee</Text>
+              <Text style = {styles.eventText}>Mon, Jan 4 9:00am-12:00pm</Text>
+              <Text style = {styles.eventText}>2040 W Cuthbert Ave, Midland, TX</Text>
+              <View style = {styles.eventButton}>
+                <Button
+                  title="Going to Event!"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Going!')}
+                />
+                <Button
+                  title="Interested!"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Interested!')}
+                />
+                <Button
+                  title="Share Event!"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Share!')}
+                />
+              </View>
+            </View>
+          </View>
+          <View>
+          <Image style = {styles.carPics} source = {require('./assets/Cars/DodgeChallenger.jpg')}/>
+          <ActivityIndicator style = {styles.carLoad}
+              size="large" color="#0000ff">
+            </ActivityIndicator>
+            <Button style = {styles.reportButton}
+                  title="Report"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Report!')}
+                />
+          <View style = {styles.eventInfo}>
+              <Text style = {styles.eventText}>Cars and Coffee</Text>
+              <Text style = {styles.eventText}>Mon, Jan 4 9:00am-12:00pm</Text>
+              <Text style = {styles.eventText}>2040 W Cuthbert Ave, Midland, TX</Text>
+              <View style = {styles.eventButton}>
+              <Button
+                  title="Going to Event!"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Going!')}
+                />
+                <Button
+                  title="Interested!"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Interested!')}
+                />
+                <Button
+                  title="Share Event!"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Share!')}
+                />
+              </View>
+            </View>
+          </View>
+          <View>
+            <Image style = {styles.carPics} source = {require('./assets/Cars/chevyCamero.jpg')}/>
+            <ActivityIndicator style = {styles.carLoad}
+              size="large" color="#0000ff">
+            </ActivityIndicator>
+            <Button style = {styles.reportButton}
+                  title="Report"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Report!')}
+                />
+            <View style = {styles.eventInfo}>
+              <Text style = {styles.eventText}>Cars and Coffee</Text>
+              <Text style = {styles.eventText}>Mon, Jan 4 9:00am-12:00pm</Text>
+              <Text style = {styles.eventText}>2040 W Cuthbert Ave, Midland, TX</Text>
+              <View style = {styles.eventButton}>
+              <Button style = {styles.choicesButton}
+                  title="Going to Event!"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Going!')}
+                />
+                <Button style = {styles.choicesButton}
+                  title="Interested!"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Interested!')}
+                />
+                <Button style = {styles.choicesButton}
+                  title="Share Event!"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Share!')}
+                />
+              </View>
+            </View>
+          </View>
+        </ScrollView>
 
       </View>
       
@@ -211,6 +314,7 @@ const styles = StyleSheet.create({
     flex: .5,
     width: 400,
     backgroundColor: '#C4C4C4',
+    flexDirection: 'row'
   },
   companyName: {
     color: 'white',
@@ -231,11 +335,35 @@ const styles = StyleSheet.create({
     fontFamily: 'serif',
     fontSize: 25,
   },
-  picContent: {
+  eventText: {
+    fontWeight: "bold"
+  },
+  picContentView: {
     flex: 2
   },
+  carPics: {
+    width: 400
+  },
+  carLoad: {
+    backgroundColor: '#C4C4C4'
+  },
+  eventInfo: {
+    backgroundColor: '#C4C4C4'
+  },
+  eventButton: {
+    flex: .5,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  choicesButton : {
+    
+  },
+  reportButton: {
+
+  },
   signUpLogin: {
-   flex: 2
+   flex: 1,
+   marginTop: 100
   },
   loginInput: {
     backgroundColor: '#C9C9C9',
@@ -244,24 +372,24 @@ const styles = StyleSheet.create({
     width: 200,
   },
   loginButton: {
+   flex: .5,
    flexDirection: 'row',
-   paddingTop: 10,
+   marginTop: 100,
+   justifyContent: 'space-between',
   },
-  loginButtonSpace: {
-    
-  },
-  localEventsViewLeft: {
-
-  },
-  localEventsViewLeft: {
-
+  signUpButtonView: {
+  paddingRight: 20
   },
   localEventsInput: {
     backgroundColor: '#EFEEEE',
     color: '#000000',
     height: 40,
-    width: 100,
-    marginLeft: 200,
+    width: 200,
+    padding: 10
+  },
+  stateView: {
+    marginTop: 30
+    
   },
   footerContent: {
     flex: 2,
