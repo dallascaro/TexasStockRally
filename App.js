@@ -1,11 +1,10 @@
 import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
-import { Button, Text, View, Picker, StyleSheet, ScrollView, FlatList, Image, Alert, ActivityIndicator } from 'react-native';
+import { Button, Text, View, Picker, StyleSheet, ScrollView,Image, Alert, ActivityIndicator, Share, Modal, Pressable} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import ScrollPicker from 'react-native-wheel-scrollview-picker';
-import { StackRouter, withOrientation } from 'react-navigation';
 import Carousel from 'react-native-snap-carousel';
 import { TextInput } from 'react-native-gesture-handler';
 
@@ -53,7 +52,7 @@ const Home = () => {
         />
         </View>
         
-        <View>
+        <View style = {styles.signUpButtonView}>
         <Button
           title="Login"
           color='#D8232F'
@@ -81,6 +80,28 @@ const Events = () => {
   const [city, setCity] = useState([
     
   ])
+
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const onShare = async () => {
+    try {
+      const result = await Share.share({
+        message:
+          'Check out this cool event!',
+      });
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+          // shared with activity type of result.activityType
+        } else {
+          // shared
+        }
+      } else if (result.action === Share.dismissedAction) {
+        // dismissed
+      }
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   
   return(
     <View  style = {styles.container}  >
@@ -106,15 +127,48 @@ const Events = () => {
 
 
     <View style = {styles.picContentView}>
-
-    
-
         <ScrollView>
-          <View>
+      <View>
+
+        <View>
+          <Text>User Name</Text>
+        </View>
+
+
             <Image style = {styles.carPics} source = {require('./assets/Cars/FordMustang.jpg')}/>
             <ActivityIndicator style = {styles.carLoad}
               size="large" color="#0000ff">
             </ActivityIndicator>
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                Alert.alert("Content has been reported");
+                setModalVisible(!modalVisible);
+                }}
+              >
+              <View style={styles.centeredView}>
+                <View style={styles.modalView}>
+                  <Text style={styles.modalText}>Enter Why this content is being reported</Text>
+                  <TextInput>Enter Text</TextInput>
+                  <Pressable
+                    style={[styles.button, styles.buttonClose]}
+                    onPress={() => setModalVisible(!modalVisible)}
+                  >
+                    <Text style={styles.textStyle}>End Report</Text>
+                  </Pressable>
+                </View>
+              </View>
+            </Modal>
+            <Pressable
+              style={[styles.button, styles.buttonOpen]}
+              onPress={() => setModalVisible(true)}
+            >
+              <Text style={styles.textStyle}>Report Content</Text>
+            </Pressable>
+
+
             <Button style = {styles.reportButton}
                   title="Report"
                   color='#D8232F'
@@ -124,7 +178,9 @@ const Events = () => {
               <Text style = {styles.eventText}>Cars and Coffee</Text>
               <Text style = {styles.eventText}>Mon, Jan 4 9:00am-12:00pm</Text>
               <Text style = {styles.eventText}>2040 W Cuthbert Ave, Midland, TX</Text>
+
               <View style = {styles.eventButton}>
+                
                 <Button
                   title="Going to Event!"
                   color='#D8232F'
@@ -132,22 +188,59 @@ const Events = () => {
                 />
                 <Button
                   title="Interested!"
-                  color='#D8232F'
+                  color='#FFFF00'
                   onPress={() => Alert.alert('Interested!')}
                 />
-                <Button
+                 <Button
                   title="Share Event!"
-                  color='#D8232F'
-                  onPress={() => Alert.alert('Share!')}
+                  color='#00FF00'
+                  onPress={onShare}
                 />
               </View>
             </View>
-          </View>
+      </View>
+
           <View>
+
+          <View>
+          <Text>User Name</Text>
+        </View>
+
           <Image style = {styles.carPics} source = {require('./assets/Cars/DodgeChallenger.jpg')}/>
           <ActivityIndicator style = {styles.carLoad}
               size="large" color="#0000ff">
             </ActivityIndicator>
+
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                Alert.alert("Content has been reported");
+                setModalVisible(!modalVisible);
+                }}
+              >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Enter Why this content is being reported</Text>
+            <TextInput>Enter Text</TextInput>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>End Report</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text style={styles.textStyle}>Report Content</Text>
+      </Pressable>
+
+            
             <Button style = {styles.reportButton}
                   title="Report"
                   color='#D8232F'
@@ -165,22 +258,58 @@ const Events = () => {
                 />
                 <Button
                   title="Interested!"
-                  color='#D8232F'
+                  color='#FFFF00'
                   onPress={() => Alert.alert('Interested!')}
                 />
                 <Button
                   title="Share Event!"
-                  color='#D8232F'
-                  onPress={() => Alert.alert('Share!')}
+                  color='#00FF00'
+                  onPress={onShare}
                 />
               </View>
             </View>
           </View>
+         
           <View>
+
+          <View>
+          <Text>User Name</Text>
+        </View>
+
             <Image style = {styles.carPics} source = {require('./assets/Cars/chevyCamero.jpg')}/>
             <ActivityIndicator style = {styles.carLoad}
               size="large" color="#0000ff">
             </ActivityIndicator>
+
+            <Modal
+              animationType="slide"
+              transparent={true}
+              visible={modalVisible}
+              onRequestClose={() => {
+                Alert.alert("Content has been reported");
+                setModalVisible(!modalVisible);
+                }}
+              >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>Enter Why this content is being reported</Text>
+            <TextInput>Enter Text</TextInput>
+            <Pressable
+              style={[styles.button, styles.buttonClose]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>End Report</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
+      <Pressable
+        style={[styles.button, styles.buttonOpen]}
+        onPress={() => setModalVisible(true)}
+      >
+        <Text style={styles.textStyle}>Report Content</Text>
+      </Pressable>
+
             <Button style = {styles.reportButton}
                   title="Report"
                   color='#D8232F'
@@ -198,13 +327,13 @@ const Events = () => {
                 />
                 <Button style = {styles.choicesButton}
                   title="Interested!"
-                  color='#D8232F'
+                  color='#FFFF00'
                   onPress={() => Alert.alert('Interested!')}
                 />
-                <Button style = {styles.choicesButton}
+                 <Button
                   title="Share Event!"
-                  color='#D8232F'
-                  onPress={() => Alert.alert('Share!')}
+                  color='#00FF00'
+                  onPress={onShare}
                 />
               </View>
             </View>
@@ -230,7 +359,68 @@ const Services = () => {
 const Profile = () => {
   return(
     <View  style = {styles.container}  >
-      <Text>Profile Screen</Text>
+
+    <View style = {styles.profileCarView} >
+      <Image style = {styles.profileCar} source = {require('./assets/Cars/FordMustang.jpg')}/>
+    </View>
+
+    <View style = {styles.profilePictureView} >
+      <Image style = {styles.profilePicture} source = {require('./assets/ProfilePic/profilePic.jpg')}/>
+    <Text>UserName</Text>
+    </View>       
+
+      <View style = {styles.meunFeed} >
+        <Text style = {styles. menuSpace}>Attending</Text>
+        <Text style = {styles. menuSpace}>Interested</Text>
+        <Text style = {styles. menuSpace}>My Events</Text>
+        
+      </View>
+
+
+      <View style = {styles.eventFeed}>
+        <ScrollView style = {styles.eventDetails}>
+        <Image style = {styles.profileCar} source = {require('./assets/Cars/chevyCamero.jpg')}/>
+        <View style = {styles.eventInfo}>
+              <Text style = {styles.eventText}>Cars and Coffee</Text>
+              <Text style = {styles.eventText}>Mon, Jan 4 9:00am-12:00pm</Text>
+              <Text style = {styles.eventText}>2040 W Cuthbert Ave, Midland, TX</Text>
+
+              <View style = {styles.eventButton}>
+                
+                <Button
+                  title="Going to Event!"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Going!')}
+                />
+                <Button
+                  title="Interested!"
+                  color='#FFFF00'
+                  onPress={() => Alert.alert('Interested!')}
+                />
+              </View>
+            </View>
+            <Image style = {styles.profileCar} source = {require('./assets/Cars/chevyCamero.jpg')}/>
+        <View style = {styles.eventInfo}>
+              <Text style = {styles.eventText}>Cars and Coffee</Text>
+              <Text style = {styles.eventText}>Mon, Jan 4 9:00am-12:00pm</Text>
+              <Text style = {styles.eventText}>2040 W Cuthbert Ave, Midland, TX</Text>
+
+              <View style = {styles.eventButton}>
+                
+                <Button
+                  title="Going to Event!"
+                  color='#D8232F'
+                  onPress={() => Alert.alert('Going!')}
+                />
+                <Button
+                  title="Interested!"
+                  color='#FFFF00'
+                  onPress={() => Alert.alert('Interested!')}
+                />
+              </View>
+            </View>
+        </ScrollView>
+      </View>
     </View>
   );
   
@@ -344,6 +534,34 @@ const styles = StyleSheet.create({
   carPics: {
     width: 400
   },
+  profileCarView: {
+    flex: 1
+
+  },
+  profileCar: {
+    height: 200,
+    width: 400
+  },
+  profilePictureView: {
+    flex: 1,
+    width: 400,
+    backgroundColor: '#C4C4C4'
+
+  },
+  profilePicture: {
+    height: 100,
+    width: 100,
+    borderRadius: 100/2
+  },
+  meunFeed: {
+   
+  },
+  eventFeed: {  
+    flex: 1
+  },
+  eventDetails: {
+
+  },
   carLoad: {
     backgroundColor: '#C4C4C4'
   },
@@ -378,7 +596,9 @@ const styles = StyleSheet.create({
    justifyContent: 'space-between',
   },
   signUpButtonView: {
-  paddingRight: 20
+  paddingRight: 20,
+  paddingBottom: 20,
+  height: 100
   },
   localEventsInput: {
     backgroundColor: '#EFEEEE',
@@ -400,5 +620,12 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 25,
     paddingLeft: 120
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
   }
 });
