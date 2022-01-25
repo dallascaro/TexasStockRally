@@ -2,6 +2,7 @@ import 'react-native-gesture-handler';
 import React, { useState, useEffect } from 'react';
 import { Button, Text, View, Picker, StyleSheet, ScrollView,Image, Alert, ActivityIndicator, Share, Modal, Pressable} from 'react-native';
 import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import ScrollPicker from 'react-native-wheel-scrollview-picker';
@@ -9,6 +10,7 @@ import Carousel from 'react-native-snap-carousel';
 import { TextInput } from 'react-native-gesture-handler';
 
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 const carouselItems = require('./carousel.json')
 
@@ -20,7 +22,7 @@ const Home = () => {
        
        <View style = {styles.headBanner}>
           <View style = {styles.companyNamePlacement}>
-          <Text style = {styles.companyName}>Texas Stock Ralley</Text>
+          <Text style = {styles.companyName}>Texas Stock Rally</Text>
           </View>
          </View>
      
@@ -105,9 +107,9 @@ const Events = () => {
   
   return(
     <View  style = {styles.container}  >
-     <View style = {styles.headBanner}>
+     <View style = {styles.headBannerEvents}>
           <View style = {styles.companyNamePlacement}>
-          <Text style = {styles.companyName}>Texas Stock Ralley</Text>
+          <Text style = {styles.companyName}>Texas Stock Rally</Text>
           </View>
     </View>
 
@@ -116,10 +118,10 @@ const Events = () => {
          
          <View style = {styles.cityView}> 
          <TextInput style = {styles.localEventsInput}
-        placeholder='name@example.com'>
+        placeholder='Enter City Name'>
           City</TextInput>
           <TextInput style = {styles.localEventsInput}
-        placeholder='name@example.com'>
+        placeholder='Enter State Name'>
           State</TextInput>
         </View>
     </View>
@@ -130,8 +132,9 @@ const Events = () => {
         <ScrollView>
       <View>
 
-        <View>
-          <Text>User Name</Text>
+        <View style = {styles.eventsProfilePost}>
+        <Image style = {styles.eventsProfilePicture} source = {require('./assets/ProfilePic/profilePic.jpg')}/>
+          <Text style = {styles. eventsUserName}>User Name</Text>
         </View>
 
 
@@ -168,12 +171,6 @@ const Events = () => {
               <Text style={styles.textStyle}>Report Content</Text>
             </Pressable>
 
-
-            <Button style = {styles.reportButton}
-                  title="Report"
-                  color='#D8232F'
-                  onPress={() => Alert.alert('Report!')}
-                />
             <View style = {styles.eventInfo}>
               <Text style = {styles.eventText}>Cars and Coffee</Text>
               <Text style = {styles.eventText}>Mon, Jan 4 9:00am-12:00pm</Text>
@@ -202,8 +199,9 @@ const Events = () => {
 
           <View>
 
-          <View>
-          <Text>User Name</Text>
+          <View style = {styles.eventsProfilePost}>
+        <Image style = {styles.eventsProfilePicture} source = {require('./assets/ProfilePic/profilePic.jpg')}/>
+          <Text style = {styles. eventsUserName}>User Name</Text>
         </View>
 
           <Image style = {styles.carPics} source = {require('./assets/Cars/DodgeChallenger.jpg')}/>
@@ -240,12 +238,6 @@ const Events = () => {
         <Text style={styles.textStyle}>Report Content</Text>
       </Pressable>
 
-            
-            <Button style = {styles.reportButton}
-                  title="Report"
-                  color='#D8232F'
-                  onPress={() => Alert.alert('Report!')}
-                />
           <View style = {styles.eventInfo}>
               <Text style = {styles.eventText}>Cars and Coffee</Text>
               <Text style = {styles.eventText}>Mon, Jan 4 9:00am-12:00pm</Text>
@@ -272,8 +264,9 @@ const Events = () => {
          
           <View>
 
-          <View>
-          <Text>User Name</Text>
+          <View style = {styles.eventsProfilePost}>
+        <Image style = {styles.eventsProfilePicture} source = {require('./assets/ProfilePic/profilePic.jpg')}/>
+          <Text style = {styles. eventsUserName}>User Name</Text>
         </View>
 
             <Image style = {styles.carPics} source = {require('./assets/Cars/chevyCamero.jpg')}/>
@@ -310,11 +303,6 @@ const Events = () => {
         <Text style={styles.textStyle}>Report Content</Text>
       </Pressable>
 
-            <Button style = {styles.reportButton}
-                  title="Report"
-                  color='#D8232F'
-                  onPress={() => Alert.alert('Report!')}
-                />
             <View style = {styles.eventInfo}>
               <Text style = {styles.eventText}>Cars and Coffee</Text>
               <Text style = {styles.eventText}>Mon, Jan 4 9:00am-12:00pm</Text>
@@ -365,16 +353,16 @@ const Profile = () => {
     </View>
 
     <View style = {styles.profilePictureView} >
-      <Image style = {styles.profilePicture} source = {require('./assets/ProfilePic/profilePic.jpg')}/>
-    <Text>UserName</Text>
-    </View>       
-
-      <View style = {styles.meunFeed} >
-        <Text style = {styles. menuSpace}>Attending</Text>
-        <Text style = {styles. menuSpace}>Interested</Text>
-        <Text style = {styles. menuSpace}>My Events</Text>
-        
+      <View style = {styles.profileNamePictureView}>
+          <Image style = {styles.profilePicture} source = {require('./assets/ProfilePic/profilePic.jpg')}/>
+          <Text>User Name</Text>
       </View>
+      <View style = {styles.profileOptionsView}>
+          <Text style = {styles.profileSelection}>Attending</Text>
+          <Text style = {styles.profileSelection}>Interested</Text>
+          <Text style = {styles.profileSelection}>My Events</Text>
+        </View>
+    </View>       
 
 
       <View style = {styles.eventFeed}>
@@ -500,8 +488,13 @@ const styles = StyleSheet.create({
     width: 400,
     backgroundColor: '#222222',
   },
+  headBannerEvents: {
+    flex: .3,
+    width: 400,
+    backgroundColor: '#222222',
+  },
   eventBanner: {
-    flex: .5,
+    flex: .2,
     width: 400,
     backgroundColor: '#C4C4C4',
     flexDirection: 'row'
@@ -523,10 +516,18 @@ const styles = StyleSheet.create({
   eventName: {
     color: '#000000',
     fontFamily: 'serif',
-    fontSize: 25,
+    fontSize: 20,
+  },
+  cityView: {
+    flexDirection: 'row'
   },
   eventText: {
-    fontWeight: "bold"
+    fontWeight: "bold",
+    fontSize: 18,
+    fontFamily: 'sans-serif'
+  },
+  eventsProfilePost: {
+    flexDirection: 'row'
   },
   picContentView: {
     flex: 2
@@ -543,7 +544,7 @@ const styles = StyleSheet.create({
     width: 400
   },
   profilePictureView: {
-    flex: 1,
+    flex: .8,
     width: 400,
     backgroundColor: '#C4C4C4'
 
@@ -553,11 +554,27 @@ const styles = StyleSheet.create({
     width: 100,
     borderRadius: 100/2
   },
-  meunFeed: {
+  profileNamePictureView:{
+      marginLeft: 150
+  },
+  profileOptionsView : {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
    
   },
+  profileSelection: {
+    
+  },
+  eventsProfilePicture: {
+    height: 50,
+    width: 50,
+    borderRadius: 50/2
+  },
+  eventsUserName: {
+    fontSize: 25
+  },
   eventFeed: {  
-    flex: 1
+    flex: 1.4
   },
   eventDetails: {
 
@@ -576,9 +593,7 @@ const styles = StyleSheet.create({
   choicesButton : {
     
   },
-  reportButton: {
 
-  },
   signUpLogin: {
    flex: 1,
    marginTop: 100
@@ -603,8 +618,8 @@ const styles = StyleSheet.create({
   localEventsInput: {
     backgroundColor: '#EFEEEE',
     color: '#000000',
-    height: 40,
-    width: 200,
+    height: 51,
+    width: 150,
     padding: 10
   },
   stateView: {
